@@ -1,0 +1,62 @@
+// { Driver Code Starts
+//Initial Template for C++
+
+#include <bits/stdc++.h>
+#include <unordered_map>
+using namespace std;
+
+vector<int> TopK(vector<int>& array, int k) ;
+
+
+ // } Driver Code Ends
+
+//User function Template for C++
+
+vector<int> TopK(vector<int>& array, int k) 
+{
+    unordered_map<int,int> mp;
+    
+    for(auto i: array){
+        mp[i]++;
+    }
+    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> minHeap;
+    
+    for(auto it=mp.begin();it!=mp.end();it++){
+        minHeap.push(make_pair(it->second,it->first));
+        if(minHeap.size()>k)
+            minHeap.pop();
+    }
+    
+    vector<int> v;
+    while(!minHeap.empty()){
+        v.push_back(minHeap.top().second);
+        minHeap.pop();
+    }
+    return {v.rbegin(),v.rend()};
+}
+
+// { Driver Code Starts.
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,k ;
+        cin>>n;
+        vector <int> array(n);
+
+        for(int i=0; i<n; i++)
+            cin>>array[i];
+        cin>>k;
+
+        vector<int> result = TopK(array,k);
+        
+        for(int i=0; i<result.size();i++)
+            cout<<result[i]<<" ";
+
+        cout<<"\n";
+
+    }
+    return 0;
+}  // } Driver Code Ends
