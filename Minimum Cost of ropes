@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int main() {
+	//code
+	int t; cin>>t;
+	while(t--){
+	    ll n; cin>>n;
+	    ll a[n];
+	    for(ll i=0;i<n;i++) cin>>a[i];
+	    
+	    priority_queue<ll,vector<ll>,greater<ll>> minHeap;
+	    
+	    for(ll i=0;i<n;i++)
+	        minHeap.push(a[i]);
+	    ll sum=0;
+	   while(minHeap.size()>1){
+	       ll a=minHeap.top();
+	       minHeap.pop();
+	       ll b=minHeap.top();
+	       minHeap.pop();
+	       sum+=(a+b);
+	       minHeap.push(a+b);
+	   }
+	   cout<<sum<<endl;
+	}
+	return 0;
+}
